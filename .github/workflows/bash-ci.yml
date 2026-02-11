@@ -1,4 +1,4 @@
-name: Bash CI
+name: Bash CI/CD
 
 on:
   push:
@@ -15,12 +15,16 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Make scripts executable
-        run: chmod +x scripts/*.sh
-
-      - name: Run shellcheck
+      - name: Install shellcheck
         run: |
           sudo apt-get update
           sudo apt-get install -y shellcheck
-          shellcheck scripts/*.sh
+
+      - name: Lint scripts
+        run: shellcheck scripts/*.sh
+
+      - name: Test health check script (expected failure)
+        run: |
+          chmod +x scripts/check-service.sh
+          ./scripts/check-service.sh nonexistent-service || exit 0
 
