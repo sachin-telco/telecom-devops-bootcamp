@@ -26,7 +26,7 @@ jobs:
       - name: Test health check script (expected failure)
         run: |
           chmod +x scripts/check-service.sh
-          ./scripts/check-service.sh nonexistent-service || exit 0
+          ./scripts/check-service.sh nonexistent-service
 
   deploy:
     runs-on: ubuntu-latest
