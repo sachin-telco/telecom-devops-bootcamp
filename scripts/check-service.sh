@@ -1,4 +1,9 @@
 #!/usr/bin/env bash
+
+echo "Checking service health at $(date)"
+
+echo "Execution user: $(whoami)"
+
 set -euo pipefail
 
 SERVICE_NAME="${1:-}"
